@@ -33,5 +33,12 @@ namespace UniversityRegistrar.Controllers
       return RedirectToAction("Index");
     }
 
+    public ActionResult Details(int id)
+    {
+      Student thisStudent = _db.Students
+                            .FirstOrDefault(student => student.StudentId == id);
+      return View(thisStudent);
+    }
+
   }
 }
