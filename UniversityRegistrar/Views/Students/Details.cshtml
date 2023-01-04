@@ -21,10 +21,16 @@ else
   @foreach(CourseStudent join in Model.JoinEntities)
   {
     <li>@join.Course.Number</li>
-    
+    @using (Html.BeginForm("DeleteJoin", "Students"))
+    {
+      @Html.Hidden("joinId", @join.CourseStudentId)
+      <input type="submit" value="Delete" />
+    }
   }
   </ul>
 }
 
 <p>@Html.ActionLink("Enroll in a course", "AddCourse", new { id = Model.StudentId })</p>
+<p>@Html.ActionLink("Edit Student", "Edit", new { id = Model.StudentId })</p>
+<p>@Html.ActionLink("Delete Student", "Delete", new { id = Model.StudentId })</p>
 <p>@Html.ActionLink("Back to list", "Index")</p>
