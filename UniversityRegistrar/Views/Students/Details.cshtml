@@ -9,3 +9,22 @@
 
 <h3>Student: @Html.DisplayFor(model => model.Name)</h3>
 <h3>Date of Enrollement: @Html.DisplayFor(model => model.Enrollment)</h3>
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This student is not enrolled in any courses.</p>
+}
+else
+{
+  <h4>Courses</h4>
+  <ul>
+  @foreach(CourseStudent join in Model.JoinEntities)
+  {
+    <li>@join.Course.Number</li>
+    
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Enroll in a course", "AddCourse", new { id = Model.StudentId })</p>
+<p>@Html.ActionLink("Back to list", "Index")</p>
