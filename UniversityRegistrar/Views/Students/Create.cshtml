@@ -6,13 +6,15 @@
 
 <h4>Add new student</h4>
 
+<p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Name)
   @Html.TextBoxFor(model => model.Name)
 
   @Html.LabelFor(model => model.Enrollment)
-  @Html.TextBoxFor(model => model.Enrollment, new { type="date" })
+  @Html.EditorFor(model => model.Enrollment)
   <input type="submit" value="Add student" />
 }
 
