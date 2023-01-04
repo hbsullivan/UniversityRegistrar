@@ -7,6 +7,7 @@ namespace UniversityRegistrar.Models
     public Student Student { get; set; }
     public int CourseId { get; set; }
     public Course Course{ get; set; }
+    public string Status { get; set; } = "Ongoing";
   }
 }
 

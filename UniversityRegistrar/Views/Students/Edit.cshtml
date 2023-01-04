@@ -3,6 +3,7 @@
 }
 
 @model UniversityRegistrar.Models.Student
+@using UniversityRegistrar.Models
 
 <h2>Edit</h2>
 
@@ -19,6 +20,17 @@
   @Html.EditorFor(model => model.Enrollment)
 
   <input type="submit" value="Update" />
+
+  <h4>Courses</h4>
+  <ul>
+  @foreach(CourseStudent join in Model.JoinEntities)
+  {
+    @Html.Hidden("courseStudentId", join.CourseStudentId)
+    <li>@join.Course.Number | Status: <select name="status" value=$"{join.Status}"><option>Ongoing</option><option>Failed</option><option>Completed</option></select></li>
+    
+  }
+  </ul>
 }
+
 
 <p>@Html.ActionLink("Back to list", "Index")</p>    

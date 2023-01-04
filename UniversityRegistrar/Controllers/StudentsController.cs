@@ -73,13 +73,21 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult Edit(int id)
     {
-      Student thisStudent = _db.Students.FirstOrDefault(students => students.StudentId == id);
+      Student thisStudent = _db.Students
+                            .Include(student => student.JoinEntities)
+                            .ThenInclude(join => join.Course)
+                            .FirstOrDefault(student => student.StudentId == id);
+      //ViewBag.Status = new SelectList(_db.Courses, "CourseId", "Name");
       return View(thisStudent);
     }
 
     [HttpPost]
-    public ActionResult Edit(Student student)
+    public ActionResult Edit(Student student, int courseStudentId, string status)
     {
+      
+      CourseStudent courseStudent = _db.CourseStudents.FirstOrDefault(cs => cs.CourseStudentId == courseStudentId);
+      courseStudent.Status = status;
+      _db.CourseStudents.Update(courseStudent);
       _db.Students.Update(student);
       _db.SaveChanges();
       return RedirectToAction("Index");
