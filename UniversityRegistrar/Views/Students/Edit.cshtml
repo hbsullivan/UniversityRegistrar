@@ -26,7 +26,7 @@
   @foreach(CourseStudent join in Model.JoinEntities)
   {
     @Html.Hidden("courseStudentId", join.CourseStudentId)
-    <li>@join.Course.Number | Status: <select name="status" value=$"{join.Status}"><option>Ongoing</option><option>Failed</option><option>Completed</option></select></li>
+    <li>@join.Course.Number | Status: <select name="status"><option>Ongoing</option><option>Failed</option><option>Completed</option></select></li>
     
   }
   </ul>

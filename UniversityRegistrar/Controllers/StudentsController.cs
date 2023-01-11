@@ -4,9 +4,11 @@ using UniversityRegistrar.Models;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UniversityRegistrar.Controllers
 {
+  [Authorize]
   public class StudentsController : Controller
   {
     private readonly UniversityRegistrarContext _db;
@@ -15,7 +17,7 @@ namespace UniversityRegistrar.Controllers
     {
       _db = db;
     }
-
+    [AllowAnonymous]
     public ActionResult Index()
     {
       return View(_db.Students.ToList());
@@ -40,7 +42,7 @@ namespace UniversityRegistrar.Controllers
       return RedirectToAction("Index");
       }
     }
-
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       Student thisStudent = _db.Students

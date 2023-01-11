@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using UniversityRegistrar.Models;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UniversityRegistrar.Controllers
 {
+  [Authorize]
   public class CoursesController : Controller
   {
     private readonly UniversityRegistrarContext _db;
@@ -15,7 +17,7 @@ namespace UniversityRegistrar.Controllers
     {
       _db = db;
     }
-
+    [AllowAnonymous]
     public ActionResult Index()
     {
       return View (_db.Courses.ToList());
@@ -33,7 +35,7 @@ namespace UniversityRegistrar.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       Course thisCourse = _db.Courses
